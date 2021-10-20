@@ -33,6 +33,30 @@
                 android:gravity="center"
                 android:onClick="telphoneImeiHook"
                 android:text="telphone manager aidl hook" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:onClick="createService"
+                android:text="create service" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:onClick="bindService"
+                android:text="bind service" />
         </LinearLayout>
     </ScrollView>
 
