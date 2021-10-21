@@ -3,7 +3,9 @@ package com.aire.android.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aire.android.aidl.PhoneInfoActivity
 import com.aire.android.test.R
@@ -23,6 +25,26 @@ class MainActivity : AppCompatActivity {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i("abc", "onStart: ")
+    }
+
+    override fun onResume() {
+        Log.i("abc", "onResume: ")
+        super.onResume()
+        Toast.makeText(
+            this,
+            "abs${findViewById<View>(R.id.texttureview_main).width}",
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i("abc", "onStop: ")
     }
 
     fun textureViewClick(view: View) {
