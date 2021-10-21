@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aire.android.aidl.PhoneInfoActivity
+import com.aire.android.okhttp.RequestActivity
 import com.aire.android.test.R
 import com.aire.android.test.service.ServiceBindTestActivity
 import com.aire.android.test.service.ServiceTestActivity
@@ -61,6 +62,10 @@ class MainActivity : AppCompatActivity {
 
     fun bindService(view: View) {
         startActivity(Intent(this, ServiceBindTestActivity::class.java))
+    }
+
+    fun requestTest(view: View) {
+        startActivity(Intent(this, RequestActivity::class.java))
     }
 
 }
