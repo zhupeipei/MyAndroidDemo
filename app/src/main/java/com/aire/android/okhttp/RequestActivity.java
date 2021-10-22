@@ -35,7 +35,7 @@ public class RequestActivity extends AppCompatActivity {
             public void run() {
                 OkHttpClient client = new OkHttpClient.Builder().build();
 
-                client.newCall(new Request.Builder().url("https://www.baidu.com").build()).enqueue(new Callback() {
+                client.newCall(new Request.Builder().url("https://www.baidu.com").get().build()).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         tv.post(new Runnable() {

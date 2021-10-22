@@ -13,6 +13,7 @@ import com.aire.android.test.R
 import com.aire.android.test.service.ServiceBindTestActivity
 import com.aire.android.test.service.ServiceTestActivity
 import com.aire.android.textureview.TextureViewActivity
+import com.aire.android.webview.WebviewActivity
 
 class MainActivity : AppCompatActivity {
     constructor() : super() {
@@ -66,6 +67,10 @@ class MainActivity : AppCompatActivity {
 
     fun requestTest(view: View) {
         startActivity(Intent(this, RequestActivity::class.java))
+    }
+
+    fun webviewCrashFix(view: View) {
+        startActivity(Intent(this, WebviewActivity::class.java))
     }
 
 }

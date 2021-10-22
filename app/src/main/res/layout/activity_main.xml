@@ -70,6 +70,18 @@
                 android:gravity="center"
                 android:onClick="requestTest"
                 android:text="网络请求测试" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:onClick="webviewCrashFix"
+                android:text="Webview崩溃catch" />
         </LinearLayout>
     </ScrollView>
 
