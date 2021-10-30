@@ -30,13 +30,15 @@ class MainActivity : AppCompatActivity {
     }
 
     override fun onStart() {
+        Log.i("abc", "onStart1: " + this)
         super.onStart()
-        Log.i("abc", "onStart: ")
+        Log.i("abc", "onStart2: " + this)
     }
 
     override fun onResume() {
-        Log.i("abc", "onResume: ")
+        Log.i("abc", "onResume1: " + this)
         super.onResume()
+        Log.i("abc", "onResume2: " + this)
         Toast.makeText(
             this,
             "abs${findViewById<View>(R.id.texttureview_main).width}",
@@ -45,8 +47,15 @@ class MainActivity : AppCompatActivity {
     }
 
     override fun onStop() {
+        Log.i("abc", "onStop1: " + this)
         super.onStop()
-        Log.i("abc", "onStop: ")
+        Log.i("abc", "onStop2: " + this)
+    }
+
+    override fun onDestroy() {
+        Log.i("abd", "onDestroy1: " + this)
+        super.onDestroy()
+        Log.i("abd", "onDestroy2: " + this)
     }
 
     fun textureViewClick(view: View) {

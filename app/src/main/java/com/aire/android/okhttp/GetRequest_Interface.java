@@ -18,7 +18,6 @@ public interface GetRequest_Interface {
 
     // http://cms.9nali.com/mermaid/config/debug/trackName
     @POST("mermaid/config/debug/trackName")
-    @FormUrlEncoded
     Call<Reception> getMermaidConfigData(@Body RequestBody jsonData);
     // @GET注解的作用:采用Get方法发送网络请求
 

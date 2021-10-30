@@ -5,13 +5,9 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         debug {
-            storeFile file('/Users/xmly/spzm/keystroe_test/key_stroe')
-            storePassword '111111'
-            keyPassword '111111'
-            keyAlias 'key0'
         }
         release {
-            storeFile file('/Users/xmly/spzm/keystroe_test/key_stroe')
+            storeFile file('/Users/xmly/development/github_pro/MyAndroidDemo/app/src/main/key_store/key_stroe')
             storePassword '111111'
             keyAlias 'key0'
             keyPassword '111111'

@@ -1,6 +1,8 @@
 package com.aire.android.okhttp;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,16 +22,43 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RequestActivity extends AppCompatActivity {
+    private static final String TAG = "request";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "onCreate1: " + this);
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate2: " + this);
         setContentView(R.layout.activity_request);
+        Log.i(TAG, "onCreate3: " + this);
+    }
+
+    @Override
+    protected void onStart() {
+        Log.i(TAG, "onStart1: " + this);
+        super.onStart();
+        Log.i(TAG, "onStart2: " + this);
+    }
+
+    @Override
+    protected void onStop() {
+        Log.i(TAG, "onStop1: " + this);
+        super.onStop();
+        Log.i(TAG, "onStop1: " + this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.i(TAG, "onDestroy1: " + this);
+        super.onDestroy();
+        Log.i(TAG, "onDestroy2: " + this);
     }
 
     @Override
     protected void onResume() {
+        Log.i(TAG, "onResume1: " + this);
         super.onResume();
+        Log.i(TAG, "onResume2: " + this);
         final TextView tv = findViewById(R.id.main_request_tv);
         tv.setText("虎丘");
 
@@ -47,28 +76,33 @@ public class RequestActivity extends AppCompatActivity {
 
         RequestBody jsonBody = RequestBody.create(MediaType.parse("application/json"), body);
         Call<Reception> call = request.getMermaidConfigData(jsonBody);
-        call.enqueue(new Callback<Reception>() {
-            // 请求成功时回调
-            @Override
-            public void onResponse(Call<Reception> call, Response<Reception> response) {
-                //请求处理,输出结果
-                response.body().show();
-            }
+//        call.enqueue(new Callback<Reception>() {
+//            // 请求成功时回调
+//            @Override
+//            public void onResponse(Call<Reception> call, Response<Reception> response) {
+//                //请求处理,输出结果
+//                response.body().show();
+//            }
+//
+//            // 请求失败时候的回调
+//            @Override
+//            public void onFailure(Call<Reception> call, Throwable throwable) {
+//                System.out.println("连接失败");
+//            }
+//        });
 
-            // 请求失败时候的回调
+        //同步请求
+        AsyncTask.execute(new Runnable() {
             @Override
-            public void onFailure(Call<Reception> call, Throwable throwable) {
-                System.out.println("连接失败");
+            public void run() {
+                try {
+                    Response<Reception> response = call.execute();
+                    response.body().show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
-
-//        //同步请求
-//        try {
-//            Response<Reception> response = call.execute();
-//            response.body().show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
 //        AsyncTask.execute(new Runnable() {
 //            @Override
