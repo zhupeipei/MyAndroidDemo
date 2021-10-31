@@ -75,7 +75,7 @@ public class RequestActivity extends AppCompatActivity {
         String body = "{\"cid\":109752,\"clientTime\":1635389985782,\"dataId\":0,\"isManual\":true,\"matchType\":0,\"metaId\":36539,\"mt\":0,\"props\":{\"currPage\":\"newPlay\",\"exposePercent\":\"50\",\"currAlbumId\":\"30820071\",\"exploreType\":\"6\",\"anchorId\":\"54267262\",\"currTrackId\":\"226803767\",\"categoryId\":\"12\"},\"seq\":90,\"serviceId\":\"slipPage\",\"sessionId\":1635389699644,\"ubtSource\":[{\"metaId\":778,\"props\":{\"rec_track\":\"3.35_52-298_412-302_426-100_137.1063\",\"adId\":\"0\",\"recommendedLanguage\":\"\",\"albumId\":\"30820071\",\"rec_src\":\"UCFJ5.cvrpcexpbsaog21\",\"position\":\"4\",\"isAd\":\"false\",\"reason_track\":\"\",\"ubtTraceId\":\"-11172277101635389704226\",\"reason_src\":\"\",\"categoryId\":\"12\",\"status\":\"flow\"}}],\"ubtTraceId\":\"-11172277101635389704226\",\"isMarkId\":false}";
 
         RequestBody jsonBody = RequestBody.create(MediaType.parse("application/json"), body);
-        Call<Reception> call = request.getMermaidConfigData(jsonBody);
+        final Call<Reception> call = request.getMermaidConfigData(jsonBody);
 //        call.enqueue(new Callback<Reception>() {
 //            // 请求成功时回调
 //            @Override
