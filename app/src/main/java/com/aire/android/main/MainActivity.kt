@@ -2,6 +2,7 @@ package com.aire.android.main
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity {
     override fun onPause() {
         Log.i("abc", "onPause1: " + this)
         super.onPause()
-        Log.i("abc", "onPause2: " + this)
+        Log.i("abc", "onPause2: " + this + ", " + isChangingConfigurations)
     }
 
     override fun onResume() {
@@ -52,10 +53,16 @@ class MainActivity : AppCompatActivity {
         ).show()
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        Log.i("abc", "onConfigurationChanged1: ")
+        super.onConfigurationChanged(newConfig)
+        Log.i("abc", "onConfigurationChanged2: ")
+    }
+
     override fun onStop() {
         Log.i("abc", "onStop1: " + this)
         super.onStop()
-        Log.i("abc", "onStop2: " + this)
+        Log.i("abc", "onStop2: " + this + ", " + this.isChangingConfigurations)
     }
 
     override fun onDestroy() {

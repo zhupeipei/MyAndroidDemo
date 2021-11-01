@@ -44,7 +44,9 @@
             android:name="com.aire.android.aidl.PhoneInfoActivity"
             android:exported="true" />
         <activity android:name="com.aire.android.textureview.TextureViewActivity" />
-        <activity android:name="com.aire.android.main.MainActivity">
+        <activity
+            android:name="com.aire.android.main.MainActivity">
+<!--            android:configChanges="orientation|screenSize">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
