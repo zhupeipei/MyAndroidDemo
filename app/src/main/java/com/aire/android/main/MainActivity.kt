@@ -35,6 +35,12 @@ class MainActivity : AppCompatActivity {
         Log.i("abc", "onStart2: " + this)
     }
 
+    override fun onPause() {
+        Log.i("abc", "onPause1: " + this)
+        super.onPause()
+        Log.i("abc", "onPause2: " + this)
+    }
+
     override fun onResume() {
         Log.i("abc", "onResume1: " + this)
         super.onResume()
@@ -80,6 +86,10 @@ class MainActivity : AppCompatActivity {
 
     fun webviewCrashFix(view: View) {
         startActivity(Intent(this, WebviewActivity::class.java))
+    }
+
+    fun lifecycleActivity(view: View) {
+        startActivity(Intent(this, LifeCycleActivity::class.java))
     }
 
 }
