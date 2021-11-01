@@ -28,6 +28,11 @@ class MainActivity : AppCompatActivity {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        var cl = MainActivity::class.java.classLoader
+        while (cl != null) {
+            Log.i("abc", "onCreate: " + cl)
+            cl = cl.parent
+        }
     }
 
     override fun onStart() {
