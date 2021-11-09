@@ -2,7 +2,9 @@ package com.aire.android.main;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Looper;
 import android.util.Log;
+import android.util.Printer;
 
 /**
  * @Author: Zhupeipei
@@ -17,6 +19,14 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Looper.getMainLooper().setMessageLogging(new Printer() {
+            @Override
+            public void println(String x) {
+                Log.i("zimo22222", "println: " + x);
+            }
+        });
+
     }
 
     @Override
