@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aire.android.aidl.PhoneInfoActivity
+import com.aire.android.fragment.FragmentActivity
 import com.aire.android.okhttp.RequestActivity
 import com.aire.android.test.R
 import com.aire.android.test.service.ServiceBindTestActivity
@@ -28,6 +29,9 @@ class MainActivity : AppCompatActivity {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        Log.i("abc", "onCreate: ")
+
         var cl = MainActivity::class.java.classLoader
         while (cl != null) {
             Log.i("abc", "onCreate: " + cl)
@@ -102,6 +106,10 @@ class MainActivity : AppCompatActivity {
 
     fun lifecycleActivity(view: View) {
         startActivity(Intent(this, LifeCycleActivity::class.java))
+    }
+
+    fun startFragment(view: View) {
+        startActivity(Intent(this, FragmentActivity::class.java))
     }
 
 }

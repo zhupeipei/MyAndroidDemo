@@ -17,11 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name="com.aire.android.fragment.FragmentActivity"
+            android:exported="false" />
+        <activity
             android:name="com.aire.android.main.LifeCycleActivity"
             android:exported="false"
-            android:theme="@android:style/Theme.Translucent" />
-        <!--            android:theme="@style/MyTransparentTheme" />-->
-
+            android:theme="@android:style/Theme.Translucent" /> <!-- android:theme="@style/MyTransparentTheme" /> -->
         <activity
             android:name="com.aire.android.webview.WebviewActivity"
             android:exported="true" />
@@ -44,9 +45,9 @@
             android:name="com.aire.android.aidl.PhoneInfoActivity"
             android:exported="true" />
         <activity android:name="com.aire.android.textureview.TextureViewActivity" />
-        <activity
-            android:name="com.aire.android.main.MainActivity">
-<!--            android:configChanges="orientation|screenSize">-->
+        <activity android:name="com.aire.android.main.MainActivity">
+
+            <!-- android:configChanges="orientation|screenSize"> -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
