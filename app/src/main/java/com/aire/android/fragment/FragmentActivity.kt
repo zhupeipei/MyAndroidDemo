@@ -19,24 +19,39 @@ class FragmentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_fragment_test)
         Log.i(TAG, "FragmentActivity onCreate: 1")
         addFragment()
+
+        mRootContainer.postDelayed(Runnable {
+//            addFragment()
+//            replaceFragment()
+        }, 1000)
         Log.i(TAG, "FragmentActivity onCreate: 2")
     }
 
     override fun onStart() {
         super.onStart()
         Log.i(TAG, "FragmentActivity onStart: ")
+        Log.i(TAG, "onStart " + Log.getStackTraceString(Throwable()))
     }
 
     override fun onResume() {
         super.onResume()
         Log.i(TAG, "FragmentActivity onResume: ")
+        Log.i(TAG, "onResume " + Log.getStackTraceString(Throwable()))
     }
 
     private fun addFragment() {
         val fm = supportFragmentManager
         val transaction = fm.beginTransaction()
-        transaction.replace(mRootContainerId, TestFragment())
+        transaction.add(mRootContainerId, TestFragment())
         transaction.commitAllowingStateLoss()
+        // commitNow 不支持回退栈
+    }
+
+    private fun replaceFragment() {
+        val fm = supportFragmentManager
+        val tranaction = fm.beginTransaction()
+        tranaction.replace(mRootContainerId, ChildFragment("child"))
+        tranaction.commitAllowingStateLoss()
     }
 
     override fun onStop() {
