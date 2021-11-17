@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aire.android.aidl.PhoneInfoActivity
+import com.aire.android.customview.CustomViewActivity
 import com.aire.android.fragment.FragmentActivity
 import com.aire.android.okhttp.RequestActivity
 import com.aire.android.test.R
@@ -110,6 +111,10 @@ class MainActivity : AppCompatActivity {
 
     fun startFragment(view: View) {
         startActivity(Intent(this, FragmentActivity::class.java))
+    }
+
+    fun viewIntercept(view: View) {
+        startActivity(Intent(this, CustomViewActivity::class.java))
     }
 
 }
