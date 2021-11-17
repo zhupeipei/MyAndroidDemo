@@ -15,28 +15,29 @@ class FragmentActivity : AppCompatActivity() {
     private val mRootContainer by lazy(LazyThreadSafetyMode.NONE) { findViewById<FrameLayout>(R.id.main_fragment_container) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i(TAG, "FragmentActivity onCreate: 1")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment_test)
-        Log.i(TAG, "FragmentActivity onCreate: 1")
+        Log.i(TAG, "FragmentActivity onCreate: 2")
         addFragment()
 
         mRootContainer.postDelayed(Runnable {
 //            addFragment()
 //            replaceFragment()
         }, 1000)
-        Log.i(TAG, "FragmentActivity onCreate: 2")
+        Log.i(TAG, "FragmentActivity onCreate: 3")
     }
 
     override fun onStart() {
-        super.onStart()
         Log.i(TAG, "FragmentActivity onStart: ")
-        Log.i(TAG, "onStart " + Log.getStackTraceString(Throwable()))
+        super.onStart()
+//        Log.i(TAG, "onStart " + Log.getStackTraceString(Throwable()))
     }
 
     override fun onResume() {
-        super.onResume()
         Log.i(TAG, "FragmentActivity onResume: ")
-        Log.i(TAG, "onResume " + Log.getStackTraceString(Throwable()))
+        super.onResume()
+//        Log.i(TAG, "onResume " + Log.getStackTraceString(Throwable()))
     }
 
     private fun addFragment() {
