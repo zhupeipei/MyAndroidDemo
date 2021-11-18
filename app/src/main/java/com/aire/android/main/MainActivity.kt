@@ -6,6 +6,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aire.android.aidl.PhoneInfoActivity
@@ -61,6 +63,15 @@ class MainActivity : AppCompatActivity {
             "abs${findViewById<View>(R.id.texttureview_main).width}",
             Toast.LENGTH_LONG
         ).show()
+
+        val rootView = findViewById<LinearLayout>(R.id.main_root_view_ll)
+
+        rootView.postDelayed(Runnable {
+            val rootView1 = findViewById<LinearLayout>(R.id.main_root_view_ll)
+            val tv = TextView(this)
+            tv.text = "nihao zhongguo"
+            rootView1.addView(tv)
+        }, 5000)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
