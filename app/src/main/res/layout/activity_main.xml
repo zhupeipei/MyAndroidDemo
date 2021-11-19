@@ -119,6 +119,18 @@
                 android:gravity="center"
                 android:onClick="viewIntercept"
                 android:text="View事件拦截" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:onClick="createDialog"
+                android:text="dialog创建" />
         </LinearLayout>
     </ScrollView>
 

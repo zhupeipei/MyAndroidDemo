@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aire.android.aidl.PhoneInfoActivity
 import com.aire.android.customview.CustomViewActivity
+import com.aire.android.dialog.DialogActivity
 import com.aire.android.fragment.FragmentActivity
 import com.aire.android.okhttp.RequestActivity
 import com.aire.android.test.R
@@ -126,6 +127,10 @@ class MainActivity : AppCompatActivity {
 
     fun viewIntercept(view: View) {
         startActivity(Intent(this, CustomViewActivity::class.java))
+    }
+
+    fun createDialog(view: View) {
+        startActivity(Intent(this, DialogActivity::class.java))
     }
 
 }
