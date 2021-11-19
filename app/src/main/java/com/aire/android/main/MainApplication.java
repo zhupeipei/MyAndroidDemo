@@ -11,6 +11,7 @@ import android.util.Printer;
  * @CreateDate: 2021/10/16 7:46 下午
  */
 public class MainApplication extends Application {
+    public static Application INSTANCE;
 
     public MainApplication() {
         int i = 0;
@@ -19,6 +20,8 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        INSTANCE = this;
 
         Looper.getMainLooper().setMessageLogging(new Printer() {
             @Override
