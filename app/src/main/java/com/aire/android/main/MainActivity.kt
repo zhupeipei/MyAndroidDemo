@@ -14,6 +14,7 @@ import com.aire.android.aidl.PhoneInfoActivity
 import com.aire.android.customview.CustomViewActivity
 import com.aire.android.dialog.DialogActivity
 import com.aire.android.fragment.FragmentActivity
+import com.aire.android.image.ImageViewActivity
 import com.aire.android.okhttp.RequestActivity
 import com.aire.android.test.R
 import com.aire.android.test.service.ServiceBindTestActivity
@@ -131,6 +132,10 @@ class MainActivity : AppCompatActivity {
 
     fun createDialog(view: View) {
         startActivity(Intent(this, DialogActivity::class.java))
+    }
+
+    fun showIv(view: View) {
+        startActivity(Intent(this, ImageViewActivity::class.java))
     }
 
 }
