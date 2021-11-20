@@ -16,6 +16,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.aire.android.image.MyGlideModule3"
+            android:value="GlideModule"></meta-data>
+        <!--        <meta-data android:name="GlideModule" android:value="com.aire.android.image.MyGlideModule3"></meta-data>-->
+
         <activity
             android:name="com.aire.android.image.ImageViewActivity"
             android:exported="false" />
