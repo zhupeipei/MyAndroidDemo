@@ -11,11 +11,21 @@ import com.aire.android.okhttp.model.Reception;
 import com.aire.android.test.R;
 
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -133,5 +143,73 @@ public class RequestActivity extends AppCompatActivity {
 //                });
 //            }
 //        });
+        rxJavaTest();
+    }
+
+    private void rxJavaTest() {
+        Observable.create(new ObservableOnSubscribe<Integer>() { // 第一步：初始化Observable
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Integer> e) throws Exception {
+                Log.e(TAG, "subscribe thread: " + Thread.currentThread());
+
+                Log.e(TAG, "Observable emit 1" + "\n");
+                e.onNext(1);
+                Log.e(TAG, "Observable emit 2" + "\n");
+                e.onNext(2);
+                Log.e(TAG, "Observable emit 3" + "\n");
+                e.onNext(3);
+                e.onComplete();
+                Log.e(TAG, "Observable emit 4" + "\n");
+                e.onNext(4);
+            }
+        }).subscribeOn(Schedulers.from(Executors.newSingleThreadExecutor(new ThreadFactory() {
+            @Override
+            public Thread newThread(Runnable r) {
+                return new Thread(r, "abc1");
+            }
+        }))).doOnSubscribe(new Consumer<Disposable>() {
+            @Override
+            public void accept(Disposable disposable) throws Exception {
+                Log.e(TAG, "doOnSubscribe thread: " + Thread.currentThread());
+            }
+        }).subscribeOn(Schedulers.from(Executors.newSingleThreadExecutor(new ThreadFactory() {
+            @Override
+            public Thread newThread(Runnable r) {
+                return new Thread(r, "abc2");
+            }
+        })))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Integer>() { // 第三步：订阅
+
+                    // 第二步：初始化Observer
+                    private int i;
+                    private Disposable mDisposable;
+
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        mDisposable = d;
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Integer integer) {
+                        Log.e(TAG, "onNext: " + Thread.currentThread());
+
+                        i++;
+                        if (i == 2) {
+                            // 在RxJava 2.x 中，新增的Disposable可以做到切断的操作，让Observer观察者不再接收上游事件
+                            mDisposable.dispose();
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(TAG, "onError : value : " + e.getMessage() + "\n");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e(TAG, "onComplete" + "\n");
+                    }
+                });
     }
 }
