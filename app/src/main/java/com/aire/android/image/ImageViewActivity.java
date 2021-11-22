@@ -18,9 +18,12 @@ public class ImageViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image_view);
 
         ImageView iv1 = findViewById(R.id.main_iv_1);
-//        Picasso.get()
-//                .load("http://ww3.sinaimg.cn/large/610dc034jw1fasakfvqe1j20u00mhgn2.jpg")
-//                .into(iv1);
+        Picasso.get()
+//                .pauseTag("ahha")
+                .load("http://ww3.sinaimg.cn/large/610dc034jw1fasakfvqe1j20u00mhgn2.jpg")
+                .tag("ahhaha")
+                .fit()
+                .into(iv1);
 
         ImageView iv2 = findViewById(R.id.main_iv_2);
         Glide.with(MainApplication.INSTANCE)
@@ -28,8 +31,8 @@ public class ImageViewActivity extends AppCompatActivity {
                 .centerCrop()
                 .into(iv2);
 
-        Glide.with(MainApplication.INSTANCE)
-                .load("http://ww3.sinaimg.cn/large/610dc034jw1fasakfvqe1j20u00mhgn2.jpg")
-                .into(iv1);
+//        Glide.with(MainApplication.INSTANCE)
+//                .load("http://ww3.sinaimg.cn/large/610dc034jw1fasakfvqe1j20u00mhgn2.jpg")
+//                .into(iv1);
     }
 }
