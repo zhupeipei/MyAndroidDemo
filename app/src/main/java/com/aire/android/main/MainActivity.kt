@@ -16,6 +16,7 @@ import com.aire.android.dialog.DialogActivity
 import com.aire.android.fragment.FragmentActivity
 import com.aire.android.image.ImageViewActivity
 import com.aire.android.okhttp.RequestActivity
+import com.aire.android.recyclerview.RecyclerViewActivity
 import com.aire.android.test.R
 import com.aire.android.test.service.ServiceBindTestActivity
 import com.aire.android.test.service.ServiceTestActivity
@@ -136,6 +137,10 @@ class MainActivity : AppCompatActivity {
 
     fun showIv(view: View) {
         startActivity(Intent(this, ImageViewActivity::class.java))
+    }
+
+    fun showRv(view: View) {
+        startActivity(Intent(this, RecyclerViewActivity::class.java))
     }
 
 }
