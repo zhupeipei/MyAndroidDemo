@@ -155,6 +155,18 @@
                 android:gravity="center"
                 android:onClick="showRv"
                 android:text="RecyclerView展示" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:onClick="annotationProcess"
+                android:text="注解处理" />
         </LinearLayout>
     </ScrollView>
 

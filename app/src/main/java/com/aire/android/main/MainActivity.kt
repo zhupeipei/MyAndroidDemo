@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aire.android.aidl.PhoneInfoActivity
+import com.aire.android.annotation.AnnotationActivity
 import com.aire.android.customview.CustomViewActivity
 import com.aire.android.dialog.DialogActivity
 import com.aire.android.fragment.FragmentActivity
@@ -141,6 +142,10 @@ class MainActivity : AppCompatActivity {
 
     fun showRv(view: View) {
         startActivity(Intent(this, RecyclerViewActivity::class.java))
+    }
+
+    fun annotationProcess(view: View) {
+        startActivity(Intent(this, AnnotationActivity::class.java))
     }
 
 }

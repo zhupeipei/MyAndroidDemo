@@ -1,2 +1,5 @@
 include ':app'
 rootProject.name = "MyAndroidTest"
+include ':app_annotation'
+include ':app_compile'
+include ':annotation-api'
