@@ -17,6 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name="com.aire.android.aidlconn.AidlConnActivity"
+            android:exported="false" />
+
+        <service
+            android:name="com.aire.android.aidlconn.service.AIDLService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":remote" />
+
+        <activity
             android:name="com.aire.android.annotation.AnnotationActivity"
             android:exported="false" />
         <activity

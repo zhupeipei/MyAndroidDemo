@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aire.android.aidl.PhoneInfoActivity
+import com.aire.android.aidlconn.AidlConnActivity
 import com.aire.android.annotation.AnnotationActivity
 import com.aire.android.customview.CustomViewActivity
 import com.aire.android.dialog.DialogActivity
@@ -146,6 +147,10 @@ class MainActivity : AppCompatActivity {
 
     fun annotationProcess(view: View) {
         startActivity(Intent(this, AnnotationActivity::class.java))
+    }
+
+    fun aidlTest(view: View) {
+        startActivity(Intent(this, AidlConnActivity::class.java))
     }
 
 }
