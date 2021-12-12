@@ -41,6 +41,6 @@ public class AIDLService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        return mBookManager;
+        return mBookManager.asBinder();
     }
 }

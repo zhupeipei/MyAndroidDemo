@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.webkit.JsPromptResult;
 import android.webkit.RenderProcessGoneDetail;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -49,6 +50,12 @@ public class WebviewActivity extends AppCompatActivity {
             Log.i("zimotag1", "onResume: " + webview.getRendererRequestedPriority());
             webview.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_BOUND, true);
         }
+        webview.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+                return super.onJsPrompt(view, url, message, defaultValue, result);
+            }
+        });
         WebViewClient client = new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {

@@ -12,6 +12,7 @@ import android.os.RemoteException;
 import com.aire.android.IBookManager;
 import com.aire.android.aidlconn.model.Book;
 import com.aire.android.aidlconn.service.AIDLService;
+import com.aire.android.main.MainApplication;
 import com.aire.android.test.R;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class AidlConnActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aidl_conn);
 
-        bindService(new Intent(this, AIDLService.class), new ServiceConnection() {
+        bindService(new Intent(MainApplication.INSTANCE, AIDLService.class), new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 IBookManager bookManager = IBookManager.Stub.asInterface(service);
