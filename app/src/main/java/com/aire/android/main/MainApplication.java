@@ -6,6 +6,9 @@ import android.os.Looper;
 import android.util.Log;
 import android.util.Printer;
 
+import com.aire.android.blockcanary.MyBlockCanaryContext;
+import com.github.moduth.blockcanary.BlockCanary;
+
 /**
  * @Author: Zhupeipei
  * @CreateDate: 2021/10/16 7:46 下午
@@ -30,6 +33,7 @@ public class MainApplication extends Application {
             }
         });
 
+        BlockCanary.install(this, new MyBlockCanaryContext()).start();//在主进程初始化调用
     }
 
     @Override

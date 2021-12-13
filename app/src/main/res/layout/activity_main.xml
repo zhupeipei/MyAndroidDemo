@@ -179,6 +179,18 @@
                 android:gravity="center"
                 android:onClick="aidlTest"
                 android:text="aidl测试" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:onClick="blockcanaryClick"
+                android:text="blockCanary使用" />
         </LinearLayout>
     </ScrollView>
 

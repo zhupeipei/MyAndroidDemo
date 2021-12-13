@@ -10,9 +10,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.collection.ArrayMap
 import com.aire.android.aidl.PhoneInfoActivity
 import com.aire.android.aidlconn.AidlConnActivity
 import com.aire.android.annotation.AnnotationActivity
+import com.aire.android.blockcanary.BlockCanaryActivity
 import com.aire.android.customview.CustomViewActivity
 import com.aire.android.dialog.DialogActivity
 import com.aire.android.fragment.FragmentActivity
@@ -45,6 +47,10 @@ class MainActivity : AppCompatActivity {
             Log.i("abc", "onCreate: " + cl)
             cl = cl.parent
         }
+
+        val arraymap = ArrayMap<String, String>()
+        arraymap["haha"] = "ksks"
+        arraymap.put("as", "zxc")
     }
 
     override fun onStart() {
@@ -151,6 +157,10 @@ class MainActivity : AppCompatActivity {
 
     fun aidlTest(view: View) {
         startActivity(Intent(this, AidlConnActivity::class.java))
+    }
+
+    fun blockcanaryClick(view: View) {
+        startActivity(Intent(this, BlockCanaryActivity::class.java))
     }
 
 }
