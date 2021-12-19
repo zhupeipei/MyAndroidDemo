@@ -71,4 +71,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.github.markzhai/blockcanary-android
     implementation group: 'com.github.markzhai', name: 'blockcanary-android', version: '1.5.0'
 
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
 }

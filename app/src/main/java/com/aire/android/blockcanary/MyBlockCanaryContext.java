@@ -39,7 +39,7 @@ public class MyBlockCanaryContext extends BlockCanaryContext {
 
     @Override
     public boolean stopWhenDebugging() {
-        return true; //是否在debug模式是关闭，如果关闭则返回true
+        return false; //是否在debug模式是关闭，如果关闭则返回true
     }
 
     @Override

@@ -14,7 +14,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="100dp">
 
             <TextView
                 android:id="@+id/texttureview_main"
@@ -191,6 +192,18 @@
                 android:gravity="center"
                 android:onClick="blockcanaryClick"
                 android:text="blockCanary使用" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:onClick="eventbusClick"
+                android:text="eventbus使用" />
         </LinearLayout>
     </ScrollView>
 

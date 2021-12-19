@@ -17,6 +17,7 @@ import com.aire.android.annotation.AnnotationActivity
 import com.aire.android.blockcanary.BlockCanaryActivity
 import com.aire.android.customview.CustomViewActivity
 import com.aire.android.dialog.DialogActivity
+import com.aire.android.eventbus.EventBusActivity
 import com.aire.android.fragment.FragmentActivity
 import com.aire.android.image.ImageViewActivity
 import com.aire.android.okhttp.RequestActivity
@@ -161,6 +162,10 @@ class MainActivity : AppCompatActivity {
 
     fun blockcanaryClick(view: View) {
         startActivity(Intent(this, BlockCanaryActivity::class.java))
+    }
+
+    fun eventbusClick(view: View) {
+        startActivity(Intent(this, EventBusActivity::class.java))
     }
 
 }
