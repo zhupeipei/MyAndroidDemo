@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name="com.aire.android.lifecycle.LifecycleActivity"
+            android:exported="false" />
+        <activity
             android:name="com.aire.android.eventbus.EventBusActivity"
             android:exported="false" />
         <activity
@@ -55,7 +58,7 @@
             android:name="com.aire.android.fragment.FragmentActivity"
             android:exported="false" />
         <activity
-            android:name="com.aire.android.main.LifeCycleActivity"
+            android:name="com.aire.android.main.ActivityLifeActivity"
             android:exported="false"
             android:theme="@android:style/Theme.Translucent" /> <!-- android:theme="@style/MyTransparentTheme" /> -->
         <activity

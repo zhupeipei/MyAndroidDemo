@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.aire.android.test.R
 
-class LifeCycleActivity : Activity() {
+class ActivityLifeActivity : Activity() {
     companion object {
         const val TAG = "lifecycle_activity"
     }

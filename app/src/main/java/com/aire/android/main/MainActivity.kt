@@ -20,6 +20,7 @@ import com.aire.android.dialog.DialogActivity
 import com.aire.android.eventbus.EventBusActivity
 import com.aire.android.fragment.FragmentActivity
 import com.aire.android.image.ImageViewActivity
+import com.aire.android.lifecycle.LifecycleActivity
 import com.aire.android.okhttp.RequestActivity
 import com.aire.android.recyclerview.RecyclerViewActivity
 import com.aire.android.test.R
@@ -129,7 +130,7 @@ class MainActivity : AppCompatActivity {
     }
 
     fun lifecycleActivity(view: View) {
-        startActivity(Intent(this, LifeCycleActivity::class.java))
+        startActivity(Intent(this, ActivityLifeActivity::class.java))
     }
 
     fun startFragment(view: View) {
@@ -166,6 +167,10 @@ class MainActivity : AppCompatActivity {
 
     fun eventbusClick(view: View) {
         startActivity(Intent(this, EventBusActivity::class.java))
+    }
+
+    fun lifecycleClick(view: View) {
+        startActivity(Intent(this, LifecycleActivity::class.java))
     }
 
 }
