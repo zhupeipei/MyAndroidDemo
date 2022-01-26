@@ -2,12 +2,7 @@ package com.aire.android.main;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Looper;
 import android.util.Log;
-import android.util.Printer;
-
-import com.aire.android.blockcanary.MyBlockCanaryContext;
-import com.github.moduth.blockcanary.BlockCanary;
 
 /**
  * @Author: Zhupeipei
@@ -26,14 +21,15 @@ public class MainApplication extends Application {
 
         INSTANCE = this;
 
-        Looper.getMainLooper().setMessageLogging(new Printer() {
-            @Override
-            public void println(String x) {
-                Log.i("zimo22222", "println: " + x);
-            }
-        });
+        Log.i("zimo22222", "onCreate: start");
+//        Looper.getMainLooper().setMessageLogging(new Printer() {
+//            @Override
+//            public void println(String x) {
+//                Log.i("zimo22222", "println: " + x);
+//            }
+//        });
 
-        BlockCanary.install(this, new MyBlockCanaryContext()).start();//在主进程初始化调用
+//        BlockCanary.install(this, new MyBlockCanaryContext()).start();//在主进程初始化调用
     }
 
     @Override

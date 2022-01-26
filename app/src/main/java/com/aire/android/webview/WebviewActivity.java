@@ -1,9 +1,5 @@
 package com.aire.android.webview;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +12,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.webkit.WebViewRenderProcess;
 import android.webkit.WebViewRenderProcessClient;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.aire.android.test.R;
 
@@ -31,7 +33,87 @@ public class WebviewActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        WebView webview = findViewById(R.id.main_webview_crash_test);
+        FrameLayout rootFl = findViewById(R.id.main_webview_container);
+        rootFl.addView(newWebView(1));
+
+        rootFl.addView(newWebView(2));
+
+        TextView tv = findViewById(R.id.main_webview_tv);
+    }
+
+    private WebView newWebView(final int num) {
+        WebView webview = new WebView(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Log.i("zimotag222", "newWebView: set success");
+            webview.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_WAIVED, true);
+        }
+        WebViewClient client = new WebViewClient() {
+            @Override
+            public boolean onRenderProcessGone(WebView view, RenderProcessGoneDetail detail) {
+                if (view != null) {
+                    ((ViewGroup) view.getParent()).removeView(view);
+                    view.destroy();
+                    view = null;
+                }
+
+                // 默认返回false
+                Log.i("zimotag222", "onRenderProcessGone: " + num + Log.getStackTraceString(new Throwable()) + "\n" + Thread.currentThread().getId());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    Log.i("zimotag2223", "onRenderProcessGone: " + num + ", " + detail.didCrash() + ", " + detail.rendererPriorityAtExit() + ", " + detail.toString());
+                }
+                return true;
+            }
+        };
+        webview.setWebViewClient(client);
+        webview.setWebChromeClient(new WebChromeClient());
+
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.loadUrl("chrome://crash");
+//        webview.loadUrl("https://m.baidu.com");
+
+        return webview;
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//            webview.setWebViewRenderProcessClient(new Executor() {
+//                @Override
+//                public void execute(Runnable command) {
+//                    Log.d("zimotag222", "Executor execute");
+//                }
+//            }, new WebViewRenderProcessClient() {
+//                @Override
+//                public void onRenderProcessUnresponsive(@NonNull WebView view, @Nullable WebViewRenderProcess renderer) {
+//                    Log.d("zimotag222", "onRenderProcessUnresponsive");
+//                }
+//
+//                @Override
+//                public void onRenderProcessResponsive(@NonNull WebView view, @Nullable WebViewRenderProcess renderer) {
+//                    Log.d("zimotag222", "onRenderProcessResponsive");
+//                }
+//            });
+//        }
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//            webview.setWebViewRenderProcessClient(new WebViewRenderProcessClient() {
+//                @Override
+//                public void onRenderProcessUnresponsive(@NonNull WebView view, @Nullable WebViewRenderProcess renderer) {
+//                    Log.i("zimotag", "onRenderProcessUnresponsive: ");
+//                }
+//
+//                @Override
+//                public void onRenderProcessResponsive(@NonNull WebView view, @Nullable WebViewRenderProcess renderer) {
+//                    Log.i("zimotag", "onRenderProcessResponsive: ");
+//                }
+//            });
+//        }
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            Log.i("zimotag1", "onResume: " + webview.getRendererRequestedPriority());
+//            webview.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_BOUND, true);
+//        }
+    }
+
+    private void oldWebView() {
+        WebView webview = null;//findViewById(R.id.main_webview_crash_test);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             webview.setWebViewRenderProcessClient(new WebViewRenderProcessClient() {
                 @Override

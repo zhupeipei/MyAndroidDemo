@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
@@ -34,6 +36,8 @@ class MainActivity : AppCompatActivity {
         val aaa = 0
     }
 
+    private val mHandler by lazy(LazyThreadSafetyMode.NONE) { Handler(Looper.getMainLooper()) }
+
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(newBase)
     }
@@ -53,6 +57,8 @@ class MainActivity : AppCompatActivity {
         val arraymap = ArrayMap<String, String>()
         arraymap["haha"] = "ksks"
         arraymap.put("as", "zxc")
+
+//        WebViewUtil.createWebView(this, mHandler)
     }
 
     override fun onStart() {
