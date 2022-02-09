@@ -7,8 +7,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.1"
+        classpath "com.android.tools.build:gradle:3.5.4"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
+//        classpath 'com.github.franticn:gradle_plugin_android_aspectjx:2.0.6'
+        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
 //        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
         // NOTE: Do not place your application dependencies here; they belong

@@ -2,6 +2,26 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'android-aspectjx'
+aspectjx {
+//    enabled true
+    //排除所有package路径中包含`android.support`的class文件及库（jar文件）
+//    exclude 'android.support'
+//    exclude 'com.google.gson'
+//    exclude 'androidx.annotation'
+    exclude 'kotlin'
+    exclude 'leakcanary'
+}
+
+//aspectjx {
+//    // 排除一些第三方库的包名（Gson、 LeakCanary 和 AOP 有冲突）
+//    // 否则就会起冲突：ClassNotFoundException: Didn't find class on path: DexPathList
+//    exclude 'androidx', 'com.google', 'com.squareup', 'com.alipay', 'com.taobao',
+//            'org.apache',
+//            'org.jetbrains.kotlin',
+//            "module-info", 'versions.9'
+//}
+
 android {
     signingConfigs {
         debug {

@@ -16,6 +16,7 @@ import androidx.collection.ArrayMap
 import com.aire.android.aidl.PhoneInfoActivity
 import com.aire.android.aidlconn.AidlConnActivity
 import com.aire.android.annotation.AnnotationActivity
+import com.aire.android.aspectJ.AspectJTestActivity
 import com.aire.android.blockcanary.BlockCanaryActivity
 import com.aire.android.customview.CustomViewActivity
 import com.aire.android.dialog.DialogActivity
@@ -177,6 +178,10 @@ class MainActivity : AppCompatActivity {
 
     fun lifecycleClick(view: View) {
         startActivity(Intent(this, LifecycleActivity::class.java))
+    }
+
+    fun aspectJClick(view: View) {
+        startActivity(Intent(this, AspectJTestActivity::class.java))
     }
 
 }
