@@ -23,6 +23,7 @@ import com.aire.android.dialog.DialogActivity
 import com.aire.android.eventbus.EventBusActivity
 import com.aire.android.fragment.FragmentActivity
 import com.aire.android.image.ImageViewActivity
+import com.aire.android.layoutinflater.LayoutInflaterActivity
 import com.aire.android.lifecycle.LifecycleActivity
 import com.aire.android.okhttp.RequestActivity
 import com.aire.android.recyclerview.RecyclerViewActivity
@@ -182,6 +183,10 @@ class MainActivity : AppCompatActivity {
 
     fun aspectJClick(view: View) {
         startActivity(Intent(this, AspectJTestActivity::class.java))
+    }
+
+    fun layoutInflaterClick(view: View) {
+        startActivity(Intent(this, LayoutInflaterActivity::class.java))
     }
 
 }
