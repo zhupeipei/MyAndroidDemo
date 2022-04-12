@@ -16,4 +16,14 @@ public class ServiceTestActivity extends AppCompatActivity {
 
         startService(new Intent(this, ServiceTest.class));
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 }
