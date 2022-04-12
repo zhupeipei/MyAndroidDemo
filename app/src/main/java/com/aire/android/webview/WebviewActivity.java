@@ -33,12 +33,18 @@ public class WebviewActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        FrameLayout rootFl = findViewById(R.id.main_webview_container);
-        rootFl.addView(newWebView(1));
+        WebViewClient client = new WebViewClient();
+        new WebView(this).setWebViewClient(client);
 
-        rootFl.addView(newWebView(2));
+        WebViewClient client1 = new FixWebViewClient();
+        new WebView(this).setWebViewClient(client1);
 
-        TextView tv = findViewById(R.id.main_webview_tv);
+//        FrameLayout rootFl = findViewById(R.id.main_webview_container);
+//        rootFl.addView(newWebView(1));
+//
+//        rootFl.addView(newWebView(2));
+//
+//        TextView tv = findViewById(R.id.main_webview_tv);
     }
 
     private WebView newWebView(final int num) {
