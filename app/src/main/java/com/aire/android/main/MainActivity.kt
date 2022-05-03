@@ -18,6 +18,7 @@ import com.aire.android.aidlconn.AidlConnActivity
 import com.aire.android.annotation.AnnotationActivity
 import com.aire.android.aspectJ.AspectJTestActivity
 import com.aire.android.blockcanary.BlockCanaryActivity
+import com.aire.android.coroutines.CoroutinesActivity
 import com.aire.android.customview.CustomViewActivity
 import com.aire.android.dialog.DialogActivity
 import com.aire.android.eventbus.EventBusActivity
@@ -187,6 +188,10 @@ class MainActivity : AppCompatActivity {
 
     fun layoutInflaterClick(view: View) {
         startActivity(Intent(this, LayoutInflaterActivity::class.java))
+    }
+
+    fun coroutinesClick(view: View) {
+        startActivity(Intent(this, CoroutinesActivity::class.java))
     }
 
 }

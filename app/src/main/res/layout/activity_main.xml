@@ -245,6 +245,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:onClick="coroutinesClick"
+                android:text="协程使用" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent" />
         </LinearLayout>
     </ScrollView>
 
