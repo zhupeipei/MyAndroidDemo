@@ -7,6 +7,13 @@
     android:orientation="vertical"
     tools:context="com.aire.android.main.MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:minHeight="100dp" />
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

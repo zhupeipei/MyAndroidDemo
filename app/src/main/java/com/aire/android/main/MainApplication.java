@@ -3,6 +3,12 @@ package com.aire.android.main;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.aire.android.anr.spfix.SpAnrFix;
+import com.tencent.mmkv.MMKV;
+
+import java.security.KeyPairGenerator;
 
 /**
  * @Author: Zhupeipei
@@ -20,6 +26,13 @@ public class MainApplication extends Application {
         super.onCreate();
 
         INSTANCE = this;
+
+        String rootDir = MMKV.initialize(this);
+        Log.i("MainApplication", "mmkv root " + rootDir);
+
+        boolean fixed = SpAnrFix.fix(this);
+        Log.i("MainApplication", "onCreate spFixed: " + fixed);
+        Toast.makeText(this, "onCreate spFixed: " + fixed, Toast.LENGTH_LONG).show();
 
         Log.i("zimo22222", "onCreate: start");
 //        Looper.getMainLooper().setMessageLogging(new Printer() {

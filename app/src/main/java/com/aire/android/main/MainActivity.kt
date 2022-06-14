@@ -76,6 +76,16 @@ class MainActivity : AppCompatActivity {
         Log.i("abc", "onPause2: " + this + ", " + isChangingConfigurations)
     }
 
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        Log.i("abc", "onRestoreInstanceState: " + this)
+        super.onRestoreInstanceState(savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        Log.i("abc", "onSaveInstanceState: " + this)
+        super.onSaveInstanceState(outState)
+    }
+
     override fun onResume() {
         Log.i("abc", "onResume1: " + this)
         super.onResume()
