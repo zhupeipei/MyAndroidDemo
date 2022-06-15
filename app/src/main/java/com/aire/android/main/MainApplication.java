@@ -2,10 +2,13 @@ package com.aire.android.main;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.aire.android.anr.spfix.SpAnrFix;
+import com.aire.android.util.CommUtils;
 import com.tencent.mmkv.MMKV;
 
 import java.security.KeyPairGenerator;
@@ -26,6 +29,8 @@ public class MainApplication extends Application {
         super.onCreate();
 
         INSTANCE = this;
+
+        CommUtils.init(this, new Handler(Looper.getMainLooper()), Looper.getMainLooper().getThread().getId());
 
         String rootDir = MMKV.initialize(this);
         Log.i("MainApplication", "mmkv root " + rootDir);
