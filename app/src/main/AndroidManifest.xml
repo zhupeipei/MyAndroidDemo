@@ -77,8 +77,9 @@
             android:exported="false" />
         <activity
             android:name="com.aire.android.main.ActivityLifeActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent" /> <!-- android:theme="@style/MyTransparentTheme" /> -->
+            android:exported="false" />
+        <!-- android:theme="@style/MyTransparentTheme" /> -->
+        <!-- android:theme="@android:style/Theme.Translucent" -->
         <activity
             android:name="com.aire.android.webview.WebviewActivity"
             android:exported="true" />

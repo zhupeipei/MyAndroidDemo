@@ -2,11 +2,16 @@ package com.aire.android.anr.spfix;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 
 import com.aire.android.anr.spfix.proxy.ConcurrentLinkedDequeProxy;
 import com.aire.android.anr.spfix.proxy.LinkedListFinisherProxy;
 import com.aire.android.anr.spfix.proxy.LinkedListWorkProxy;
+import com.aire.android.reflect.FieldUtils;
+import com.aire.android.reflect.MethodUtils;
 import com.aire.android.util.MMKVUtil;
 
 import java.lang.reflect.Field;
@@ -21,13 +26,14 @@ import java.util.LinkedList;
 public class SpAnrFix {
     public static final String TAG = "SpAnrFix";
 
-    public static boolean fix(Context context) {
-        boolean fixed = false;
+    private static boolean sWorkerHooked = false;
+
+    public static void fix(Context context) {
         try {
             boolean isFixShareAnr = MMKVUtil.getInstance().getBoolean("fix_anr", true);
             if (!isFixShareAnr) {
                 Log.i(TAG, "isFixShareAnr : false ");
-                return fixed;
+                return;
             }
             Log.i(TAG, "isFixShareAnr : true ");
             @SuppressLint("PrivateApi") Class clazz = Class.forName("android.app.QueuedWork");
@@ -38,7 +44,6 @@ public class SpAnrFix {
                 ConcurrentLinkedDequeProxy<Runnable> concurrentLinkedDequeProxy = new ConcurrentLinkedDequeProxy<Runnable>();
                 pendingWorkFinisherField.set(null, concurrentLinkedDequeProxy);
                 Log.i(TAG, "set pending work finisher proxy success");
-                fixed = true;
             } catch (Exception e) {
                 e.printStackTrace();
                 Log.i(TAG, "set pending work finisher proxy error " + e);
@@ -50,7 +55,6 @@ public class SpAnrFix {
                 LinkedListFinisherProxy<Runnable> linkedListFinisherProxy = new LinkedListFinisherProxy<Runnable>();
                 finishersField.set(null, linkedListFinisherProxy);
                 Log.i(TAG, "set finisher proxy success");
-                fixed = true;
             } catch (Exception e) {
                 e.printStackTrace();
                 Log.i(TAG, "set finisher proxy error " + e);
@@ -70,9 +74,13 @@ public class SpAnrFix {
                     Log.i(TAG, "originWorkList size " + originWorkList.size());
                     linkedListWorkProxy.addAll(originWorkList);
                     workField.set(null, linkedListWorkProxy);
+
+                    sWorkerHooked = true;
+                    Log.i(TAG, "fix swork: " + sWorkerHooked);
+
+                    hookQueuedWork(linkedListWorkProxy);
                 }
                 Log.i(TAG, "set work proxy success");
-                fixed = true;
             } catch (Exception e) {
                 e.printStackTrace();
                 Log.i(TAG, "set work proxy error " + e);
@@ -82,6 +90,42 @@ public class SpAnrFix {
             Log.i(TAG, "set proxy error " + e);
             e.printStackTrace();
         }
-        return fixed;
+    }
+
+    private static void hookQueuedWork(LinkedListWorkProxy<Runnable> listWorkProxy) {
+        try {
+            @SuppressLint("PrivateApi") Class clazz = Class.forName("android.app.QueuedWork");
+            MethodUtils.invokeStaticMethod(clazz, "getHandler");
+            Handler handler = (Handler) FieldUtils.readStaticField(clazz, "sHandler");
+            FieldUtils.writeStaticField(clazz, "sHandler", new HookedQueuedWorkHandler(handler.getLooper(), listWorkProxy));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static class HookedQueuedWorkHandler extends Handler {
+        static final int MSG_RUN = 1;
+
+        static LinkedListWorkProxy<Runnable> sWork;
+
+        HookedQueuedWorkHandler(Looper looper, LinkedListWorkProxy<Runnable> listWorkProxy) {
+            super(looper);
+            sWork = listWorkProxy;
+        }
+
+        public void handleMessage(Message msg) {
+            if (msg.what == MSG_RUN) {
+                LinkedList<Runnable> work = (LinkedList<Runnable>) sWork.clone();
+                sWork.clear();
+
+                removeMessages(HookedQueuedWorkHandler.MSG_RUN);
+
+                if (work.size() > 0) {
+                    for (Runnable w : work) {
+                        w.run();
+                    }
+                }
+            }
+        }
     }
 }

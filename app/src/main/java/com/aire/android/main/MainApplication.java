@@ -35,9 +35,7 @@ public class MainApplication extends Application {
         String rootDir = MMKV.initialize(this);
         Log.i("MainApplication", "mmkv root " + rootDir);
 
-        boolean fixed = SpAnrFix.fix(this);
-        Log.i("MainApplication", "onCreate spFixed: " + fixed);
-        Toast.makeText(this, "onCreate spFixed: " + fixed, Toast.LENGTH_LONG).show();
+        SpAnrFix.fix(this);
 
         Log.i("zimo22222", "onCreate: start");
 //        Looper.getMainLooper().setMessageLogging(new Printer() {
@@ -54,6 +52,7 @@ public class MainApplication extends Application {
     protected void attachBaseContext(Context base) {
         Log.d("zimotag", "attachBaseContext: " + base.getApplicationContext());
         super.attachBaseContext(base);
+        ReflectionUtilForTarget28.unseal(base);
         Log.d("zimotag", "attachBaseContext2: " + base.getApplicationContext());
     }
 }
