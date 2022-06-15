@@ -264,6 +264,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:onClick="ioClick"
+                android:text="IO阻塞模拟" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent" />
         </LinearLayout>
     </ScrollView>
 

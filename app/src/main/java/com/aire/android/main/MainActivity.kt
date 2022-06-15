@@ -24,6 +24,7 @@ import com.aire.android.dialog.DialogActivity
 import com.aire.android.eventbus.EventBusActivity
 import com.aire.android.fragment.FragmentActivity
 import com.aire.android.image.ImageViewActivity
+import com.aire.android.io.IOActivity
 import com.aire.android.layoutinflater.LayoutInflaterActivity
 import com.aire.android.lifecycle.LifecycleActivity
 import com.aire.android.okhttp.RequestActivity
@@ -202,6 +203,10 @@ class MainActivity : AppCompatActivity {
 
     fun coroutinesClick(view: View) {
         startActivity(Intent(this, CoroutinesActivity::class.java))
+    }
+
+    fun ioClick(view: View) {
+        startActivity(Intent(this, IOActivity::class.java))
     }
 
 }
