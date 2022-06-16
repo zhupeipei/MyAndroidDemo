@@ -53,7 +53,7 @@ public class SpAnrFix {
                 ConcurrentLinkedDequeProxy<Runnable> concurrentLinkedDequeProxy = new ConcurrentLinkedDequeProxy<Runnable>();
                 pendingWorkFinisherField.set(null, concurrentLinkedDequeProxy);
                 Log.i(TAG, "set pending work finisher proxy success");
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 e.printStackTrace();
                 Log.i(TAG, "set pending work finisher proxy error " + e);
             }
@@ -64,7 +64,7 @@ public class SpAnrFix {
                 LinkedListFinisherProxy<Runnable> linkedListFinisherProxy = new LinkedListFinisherProxy<Runnable>();
                 finishersField.set(null, linkedListFinisherProxy);
                 Log.i(TAG, "set finisher proxy success");
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 e.printStackTrace();
                 Log.i(TAG, "set finisher proxy error " + e);
             }
@@ -94,18 +94,18 @@ public class SpAnrFix {
                     Log.i(TAG, "fix swork: " + sWorkerHooked);
                 }
                 Log.i(TAG, "set work proxy success");
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 e.printStackTrace();
                 Log.i(TAG, "set work proxy error " + e);
             }
 
-        } catch (Exception e) {
+        } catch (Throwable e) {
             Log.i(TAG, "set proxy error " + e);
             e.printStackTrace();
         }
     }
 
-    private static void hookQueuedWork(LinkedListWorkProxy<Runnable> listWorkProxy) throws Exception {
+    private static void hookQueuedWork(LinkedListWorkProxy<Runnable> listWorkProxy) throws Throwable {
         @SuppressLint("PrivateApi") Class clazz = Class.forName("android.app.QueuedWork");
         // getHandler 方法调用
         final Method method = clazz.getDeclaredMethod("getHandler", null);
