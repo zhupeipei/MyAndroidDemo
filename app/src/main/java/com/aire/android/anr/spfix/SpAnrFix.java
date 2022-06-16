@@ -15,6 +15,7 @@ import com.aire.android.reflect.MethodUtils;
 import com.aire.android.util.MMKVUtil;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.LinkedList;
 
 /**
@@ -106,8 +107,17 @@ public class SpAnrFix {
 
     private static void hookQueuedWork(LinkedListWorkProxy<Runnable> listWorkProxy) throws Exception {
         @SuppressLint("PrivateApi") Class clazz = Class.forName("android.app.QueuedWork");
-        MethodUtils.invokeStaticMethod(clazz, "getHandler");
-        Handler handler = (Handler) FieldUtils.readStaticField(clazz, "sHandler");
+        // getHandler 方法调用
+        final Method method = clazz.getDeclaredMethod("getHandler", null);
+        method.setAccessible(true);
+        method.invoke(null, new Object[0]);
+        // sHandler
+        @SuppressLint("SoonBlockedPrivateApi") Field handlerField = clazz.getDeclaredField("sHandler");
+        handlerField.setAccessible(true);
+        Handler handler = (Handler) handlerField.get(null);
+        if (handler == null) {
+            throw new RuntimeException("handler null");
+        }
         sHandler = new HookedQueuedWorkHandler(handler.getLooper(), listWorkProxy);
         FieldUtils.writeStaticField(clazz, "sHandler", sHandler);
     }
