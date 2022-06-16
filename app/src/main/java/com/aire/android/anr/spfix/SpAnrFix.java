@@ -26,7 +26,15 @@ import java.util.LinkedList;
 public class SpAnrFix {
     public static final String TAG = "SpAnrFix";
 
+    private static Object sProcessingWork = new Object();
+
     private static boolean sWorkerHooked = false;
+    private static HookedQueuedWorkHandler sHandler;
+
+    public static void mockAnr() {
+        Log.i(TAG, "mockAnr: sendMessage");
+        sHandler.sendEmptyMessage(2);
+    }
 
     public static void fix(Context context) {
         try {
@@ -64,6 +72,10 @@ public class SpAnrFix {
                 Field workField = clazz.getDeclaredField("sWork");
                 workField.setAccessible(true);
 
+                Field field = clazz.getDeclaredField("sProcessingWork");
+                field.setAccessible(true);
+                sProcessingWork = field.get(null);
+
                 Field lockField = clazz.getDeclaredField("sLock");
                 lockField.setAccessible(true);
                 Object lockObject = lockField.get(null);
@@ -75,10 +87,10 @@ public class SpAnrFix {
                     linkedListWorkProxy.addAll(originWorkList);
                     workField.set(null, linkedListWorkProxy);
 
+                    hookQueuedWork(linkedListWorkProxy);
+
                     sWorkerHooked = true;
                     Log.i(TAG, "fix swork: " + sWorkerHooked);
-
-                    hookQueuedWork(linkedListWorkProxy);
                 }
                 Log.i(TAG, "set work proxy success");
             } catch (Exception e) {
@@ -92,19 +104,17 @@ public class SpAnrFix {
         }
     }
 
-    private static void hookQueuedWork(LinkedListWorkProxy<Runnable> listWorkProxy) {
-        try {
-            @SuppressLint("PrivateApi") Class clazz = Class.forName("android.app.QueuedWork");
-            MethodUtils.invokeStaticMethod(clazz, "getHandler");
-            Handler handler = (Handler) FieldUtils.readStaticField(clazz, "sHandler");
-            FieldUtils.writeStaticField(clazz, "sHandler", new HookedQueuedWorkHandler(handler.getLooper(), listWorkProxy));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private static void hookQueuedWork(LinkedListWorkProxy<Runnable> listWorkProxy) throws Exception {
+        @SuppressLint("PrivateApi") Class clazz = Class.forName("android.app.QueuedWork");
+        MethodUtils.invokeStaticMethod(clazz, "getHandler");
+        Handler handler = (Handler) FieldUtils.readStaticField(clazz, "sHandler");
+        sHandler = new HookedQueuedWorkHandler(handler.getLooper(), listWorkProxy);
+        FieldUtils.writeStaticField(clazz, "sHandler", sHandler);
     }
 
     private static class HookedQueuedWorkHandler extends Handler {
         static final int MSG_RUN = 1;
+        static final int MSG_ANR_MOCK = 2;
 
         static LinkedListWorkProxy<Runnable> sWork;
 
@@ -125,6 +135,16 @@ public class SpAnrFix {
                         w.run();
                     }
                 }
+            } else if (msg.what == MSG_ANR_MOCK) {
+                Log.i(TAG, "mockAnr: sleep");
+                synchronized (sProcessingWork) {
+                    try {
+                        Thread.sleep(60000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Log.i(TAG, "mockAnr: sleep end >>>");
             }
         }
     }

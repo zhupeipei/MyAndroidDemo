@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.aire.android.anr.spfix.SpAnrFix
 import com.aire.android.test.R
 import java.util.concurrent.CountDownLatch
 
@@ -26,23 +27,25 @@ class ActivityLifeActivity : AppCompatActivity() {
         super.onResume()
         Log.i(TAG, "onResume: ")
 
-        val c = CountDownLatch(1)
-        val sharedPreferences = this.getSharedPreferences("ting_data", Context.MODE_PRIVATE)
-        Thread {
-            kotlin.run {
-                c.countDown()
+        SpAnrFix.mockAnr()
 
-                val value = "hello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_world";
-                for (index in 0 until 1000) {
-                    val data = value + System.currentTimeMillis();
-
-                    sharedPreferences.edit()
-                        .putString("key${System.currentTimeMillis()}", data)
-                        .apply()
-                }
-
-            }
-        }.start()
+//        val c = CountDownLatch(1)
+//        val sharedPreferences = this.getSharedPreferences("ting_data", Context.MODE_PRIVATE)
+//        Thread {
+//            kotlin.run {
+//                c.countDown()
+//
+//                val value = "hello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_worldhello_world";
+//                for (index in 0 until 1000) {
+//                    val data = value + System.currentTimeMillis();
+//
+//                    sharedPreferences.edit()
+//                        .putString("key${System.currentTimeMillis()}", data)
+//                        .apply()
+//                }
+//
+//            }
+//        }.start()
     }
 
     override fun onPause() {
