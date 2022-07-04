@@ -10,9 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:minHeight="100dp" />
-
+        android:minHeight="100dp"
+        android:orientation="vertical" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -271,6 +270,30 @@
                 android:gravity="center"
                 android:onClick="ioClick"
                 android:text="IO阻塞模拟" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:onClick="doubleReflectClick"
+                android:text="双重反射" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:onClick="testClick"
+                android:text="代码测试" />
 
             <View
                 android:layout_width="match_parent"

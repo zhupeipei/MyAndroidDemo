@@ -2,6 +2,7 @@ package com.aire.android.anr.spfix;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -12,6 +13,7 @@ import com.aire.android.anr.spfix.proxy.LinkedListFinisherProxy;
 import com.aire.android.anr.spfix.proxy.LinkedListWorkProxy;
 import com.aire.android.reflect.FieldUtils;
 import com.aire.android.reflect.MethodUtils;
+import com.aire.android.reflect.ReflectionTool;
 import com.aire.android.util.MMKVUtil;
 
 import java.lang.reflect.Field;
@@ -38,6 +40,9 @@ public class SpAnrFix {
     }
 
     public static void fix(Context context) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.R) {
+            return;
+        }
         try {
             boolean isFixShareAnr = MMKVUtil.getInstance().getBoolean("fix_anr", true);
             if (!isFixShareAnr) {
@@ -70,7 +75,7 @@ public class SpAnrFix {
             }
 
             try {
-                Field workField = clazz.getDeclaredField("sWork");
+                Field workField = ReflectionTool.get().getDeclaredField(clazz, "sWork");
                 workField.setAccessible(true);
 
                 Field field = clazz.getDeclaredField("sProcessingWork");
@@ -108,7 +113,7 @@ public class SpAnrFix {
     private static void hookQueuedWork(LinkedListWorkProxy<Runnable> listWorkProxy) throws Throwable {
         @SuppressLint("PrivateApi") Class clazz = Class.forName("android.app.QueuedWork");
         // getHandler 方法调用
-        final Method method = clazz.getDeclaredMethod("getHandler", null);
+        final Method method = clazz.getDeclaredMethod("getHandler");
         method.setAccessible(true);
         method.invoke(null, new Object[0]);
         // sHandler

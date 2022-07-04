@@ -21,6 +21,7 @@ import com.aire.android.blockcanary.BlockCanaryActivity
 import com.aire.android.coroutines.CoroutinesActivity
 import com.aire.android.customview.CustomViewActivity
 import com.aire.android.dialog.DialogActivity
+import com.aire.android.doubleReflect.DoubleReflectActivity
 import com.aire.android.eventbus.EventBusActivity
 import com.aire.android.fragment.FragmentActivity
 import com.aire.android.image.ImageViewActivity
@@ -105,6 +106,10 @@ class MainActivity : AppCompatActivity {
             tv.text = "nihao zhongguo"
             rootView1.addView(tv)
         }, 5000)
+
+//        val sp = getSharedPreferences("ting_data", Context.MODE_PRIVATE)
+//        sp.edit().putString("abc", "asdaaaaaaaaaaaaaaaaaaaa ${System.currentTimeMillis()}").commit()
+//        Log.i("abcd", "onResume: saved")
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -207,6 +212,14 @@ class MainActivity : AppCompatActivity {
 
     fun ioClick(view: View) {
         startActivity(Intent(this, IOActivity::class.java))
+    }
+
+    fun doubleReflectClick(view: View) {
+        startActivity(Intent(this, DoubleReflectActivity::class.java))
+    }
+
+    fun testClick(view: View) {
+        startActivity(Intent(this, DoubleReflectActivity::class.java))
     }
 
 }
