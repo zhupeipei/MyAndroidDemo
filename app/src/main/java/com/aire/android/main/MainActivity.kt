@@ -33,6 +33,7 @@ import com.aire.android.recyclerview.RecyclerViewActivity
 import com.aire.android.test.R
 import com.aire.android.test.service.ServiceBindTestActivity
 import com.aire.android.test.service.ServiceTestActivity
+import com.aire.android.testAct.TestActivity
 import com.aire.android.textureview.TextureViewActivity
 import com.aire.android.webview.WebviewActivity
 
@@ -219,7 +220,7 @@ class MainActivity : AppCompatActivity {
     }
 
     fun testClick(view: View) {
-        startActivity(Intent(this, DoubleReflectActivity::class.java))
+        startActivity(Intent(this, TestActivity::class.java))
     }
 
 }

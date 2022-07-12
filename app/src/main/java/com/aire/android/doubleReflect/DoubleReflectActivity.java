@@ -47,7 +47,7 @@ public class DoubleReflectActivity extends AppCompatActivity {
             Method getInstanceMethod = (Method) declaredMethod.invoke(clazz, "getInstance", null);
             getInstanceMethod.setAccessible(true);
 
-            Object instance = getInstanceMethod.invoke(clazz, null);
+            Object instance = getInstanceMethod.invoke(clazz);
 
             Method method = (Method) declaredMethod.invoke(clazz, "say", null);
             method.setAccessible(true);
